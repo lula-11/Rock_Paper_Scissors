@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        console.log("Hello, World!");
+
+
+        function getComputerChoice(){
+            let i = Math.floor(Math.random() * 3);
+            if(i == 0){
+                return "rock";
+            }
+            else if(i == 1){
+                return "paper";
+            }
+            else{
+                return "scissors";
+            }
+        }
+
+
+        
+        function getHumanChoice(){
+            let value = prompt("please choose 'rock' or 'paper' or 'scissors'");
+            return value;
+        }
+
+
+        let humanScore = 0;
+        let computerScore = 0;
+        function playRound(humanChoice, computerChoice){
+            let newHumanChoice = humanChoice.toLowerCase();
+            let newComputerChoice = computerChoice.toLowerCase();
+
+            if(newHumanChoice == "rock" && newComputerChoice == "scissors" || (newHumanChoice == "scissors" && newComputerChoice == "paper") || newHumanChoice == "paper" && newComputerChoice == "rock"){
+                console.log(`You win! ${newHumanChoice} beats ${newComputerChoice}`);
+                humanScore++;
+            }
+
+            else if(newComputerChoice == newHumanChoice){
+                console.log("Tie!");
+            }
+            else{
+                console.log(`You lose! ${newComputerChoice} beats ${newHumanChoice}`);
+                computerScore++;
+            }
+        }
+
+        for(let i = 0; i < 3; i++){
+            let humanSelection = getHumanChoice();
+            let computerSelection = getComputerChoice();
+            console.log(humanSelection);
+            console.log(computerSelection);
+            playRound(humanSelection, computerSelection);
+        }
+
+        if(computerScore > humanScore){
+            console.log("u lost");
+        }
+        else if(computerScore < humanScore){
+            console.log("u win!");
+        }
+        else{
+            consloe.log("tie!");
+        }
+
+      </script>
+    
+</body>
+</html>
