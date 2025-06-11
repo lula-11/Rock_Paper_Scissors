@@ -6,10 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    
+
+    <button id="rock">rock</button>
+    <button id="paper">paper</button>
+    <button id="scissors">scissors</button>
     <script>
         console.log("Hello, World!");
-
 
         function getComputerChoice(){
             let i = Math.floor(Math.random() * 3);
@@ -25,11 +27,17 @@
         }
 
 
-        
-        function getHumanChoice(){
-            let value = prompt("please choose 'rock' or 'paper' or 'scissors'");
-            return value;
-        }
+        const buttons = document.querySelectorAll("button");
+        buttons.forEach(element => {
+            element.addEventListener("click", function (e) {
+                playRound(element.getAttribute("id"), getComputerChoice());
+            })
+        });
+
+
+        const body = document.querySelector("body");
+        const resultDiv = document.createElement("div");
+        body.appendChild(resultDiv);
 
 
         let humanScore = 0;
@@ -50,25 +58,20 @@
                 console.log(`You lose! ${newComputerChoice} beats ${newHumanChoice}`);
                 computerScore++;
             }
+
+
+            if (humanScore >= 5 || computerScore >= 5) {
+                gameOver = true;
+                buttons.forEach(button => button.disabled = true); // Disable buttons
+                if (humanScore >= 5) {
+                    resultDiv.textContent = "Game Over! You win!";
+                } else {
+                    resultDiv.textContent = "Game Over! Computer wins!";
+                }
+            }
         }
 
-        for(let i = 0; i < 3; i++){
-            let humanSelection = getHumanChoice();
-            let computerSelection = getComputerChoice();
-            console.log(humanSelection);
-            console.log(computerSelection);
-            playRound(humanSelection, computerSelection);
-        }
 
-        if(computerScore > humanScore){
-            console.log("u lost");
-        }
-        else if(computerScore < humanScore){
-            console.log("u win!");
-        }
-        else{
-            consloe.log("tie!");
-        }
 
       </script>
     
